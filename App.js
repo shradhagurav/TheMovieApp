@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/Home";
+import Constants from './src/Constants'
+import List from "./src/List";
+import Icon from 'react-native-vector-icons/Ionicons'
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerTitleAlign:'center'}}>
+        <Stack.Screen name="Home" component={Home} options={headerStyle}/>
+        <Stack.Screen name="List" component={List} options={headerStyle}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+const headerStyle = {
+title:"Movies",
+headerStyle:{backgroundColor:Constants.baseColor},
+headerTitleStyle:{color:Constants.headColor},
+headerLeft:() => <Icon name="menu" size={34} color={Constants.textColor}/>,
+
+headerRight:() => <Icon name="search" size={34} color={Constants.textColor}/>
+}
+
+export default App;
+
+//12
